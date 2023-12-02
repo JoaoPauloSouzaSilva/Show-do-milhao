@@ -1,0 +1,114 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+class Jogo {
+  constructor() {
+    this.saldo = 0;
+  }
+
+  async fazerPergunta(pergunta) {
+    console.log(pergunta.texto);
+    pergunta.opcoes.forEach((opcao, index) => {
+      console.log(`${index + 1}. ${opcao}`);
+    });
+
+    const respostaUsuario = await new Promise(resolve => {
+      rl.question('Escolha a opção correta (digite o número): ', resolve);
+    });
+
+    return this.verificarResposta(pergunta, respostaUsuario);
+  }
+
+  verificarResposta(pergunta, respostaUsuario) {
+    const indiceRespostaCorreta = pergunta.opcoes.indexOf(pergunta.respostaCorreta) + 1;
+    if (parseInt(respostaUsuario) === indiceRespostaCorreta) {
+      console.log(`Correto! Você ganhou R$${pergunta.valor}`);
+      this.saldo += pergunta.valor;
+      proximonivel();
+      return true;
+    } else {
+      console.log('Resposta incorreta. Você perdeu tudo!');
+      this.saldo = 0;
+      return false;
+    }
+
+  }
+
+  async nivel1() {
+    const perguntasNivel1 = [
+      {
+        "texto": "Qual é a capital do Brasil? 1",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 1000
+      },
+      {
+        "texto": "Qual é a capital do Brasil? 2",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 1000
+      },
+      {
+        "texto": "Qual é a capital do Brasil? 3",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 1000
+      }
+    ];
+
+    const perguntaAleatoriaNivel1 = perguntasNivel1[Math.floor(Math.random() * perguntasNivel1.length)];
+    const acertou = await this.fazerPergunta(perguntaAleatoriaNivel1);
+
+    if (acertou) {
+      console.log(`Seu saldo é: R$${this.saldo}`);
+      await this.nivel2();
+    } else {
+      console.log(`Seu saldo é: R$${this.saldo}`);
+      rl.close();
+    }
+  }
+
+  async nivel2() {
+    const perguntasNivel2 = [
+      {
+        "texto": "pergunta de viel2 1",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 10000
+      },
+      {
+        "texto": "pergunta de viel2 2",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 10000
+      },
+      {
+        "texto": "pergunta de viel2 3",
+        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+        "respostaCorreta": "Brasília",
+        "valor": 10000
+      }
+    ];
+
+    const perguntaAleatoriaNivel2 = perguntasNivel2[Math.floor(Math.random() * perguntasNivel2.length)];
+    const acertou = await this.fazerPergunta(perguntaAleatoriaNivel2);
+
+    if (acertou) {
+      console.log(`Seu saldo é: R$${this.saldo}`);
+      await this.nivel3();
+    } else {
+      console.log(`Seu saldo é: R$${this.saldo}`);
+      rl.close();
+    }
+  }
+
+  // ... outros níveis conforme necessário
+}
+
+const jogo = new Jogo();
+jogo.nivel1();
+

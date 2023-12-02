@@ -1,0 +1,17 @@
+{
+  "name": "show-do-milhao",
+  "version": "1.0.0",
+  "description": "João Paulo Souza Silva",
+  "main": "index.js",
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+  
+}

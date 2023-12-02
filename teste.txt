@@ -1,0 +1,55 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let nomeDoJogador;
+let saldo = 0;
+
+function perguntarNome(callback) {
+  rl.question('Qual é o seu nome? ', (nome) => {
+    nomeDoJogador = nome;
+    console.log(`Bem-vindo ao jogo, ${nomeDoJogador}!`);
+    callback();
+  });
+}
+
+const pergunta = {
+  "texto": "Qual é a capital do Brasil?",
+  "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
+  "respostaCorreta": "Brasília",
+  "valor": 1000
+};
+
+function fazerPergunta(callback) {
+  console.log(pergunta.texto);
+  pergunta.opcoes.forEach((opcao, index) => {
+    console.log(`${index + 1}. ${opcao}`);
+  });
+
+  rl.question('Escolha a opção correta (digite o número): ', (respostaUsuario) => {
+    verificarResposta(respostaUsuario);
+    callback();
+  });
+}
+
+function verificarResposta(respostaUsuario) {
+  const indiceRespostaCorreta = pergunta.opcoes.indexOf(pergunta.respostaCorreta) + 1;
+  if (parseInt(respostaUsuario) === indiceRespostaCorreta) {
+    console.log(`Correto! Você ganhou R$${pergunta.valor}`);
+  } else {
+    console.log('Resposta incorreta. Você perdeu tudo!');
+  }
+}
+
+function Main() {
+  perguntarNome(() => {
+    fazerPergunta(() => {
+      rl.close();
+    });
+  });
+}
+
+Main();

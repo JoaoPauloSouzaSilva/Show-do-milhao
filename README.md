@@ -1,6 +1,6 @@
 # Show do Milhão
 
-## Feito por:
+## Desenvolvedor:
   João Paulo Souza Silva
 
 ## Regras do Jogo
