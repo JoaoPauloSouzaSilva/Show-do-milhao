@@ -16,9 +16,20 @@ class Jogo {
   async fazerPergunta(pergunta) {
     // nome do jogador
 
+    console.log(`  `);
+    console.log(`Seu Saldo: R$ ${this.saldo}`);
+    console.log(`  `);
     this.numrodada += 1;
-    console.log(`Rodada ${this.numrodada}`)
+    console.log(`Rodada ${this.numrodada}`);
     console.log('  ');
+    console.log(`Responda com muito cuidado, Pois:`);
+    console.log(`  `);
+    console.log(`Se Errar: R$ 0,00  (Perde Tudo)`);
+    console.log(`  `);
+    console.log(`Se Parar: R$ ${this.saldo}`);
+    console.log(`  `);
+    console.log(`Se Acertar: + R$ ${pergunta.valor}`);
+    console.log(`  `);
 
     console.log(pergunta.texto);
     pergunta.opcoes.forEach((opcao, index) => {
@@ -96,22 +107,22 @@ class Jogo {
   async nivel1() {
     const perguntasNivel1 = [
       {
-        "texto": "Qual é a capital do Brasil? 1",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 1000
+        "texto": "Qual é o maior animal terrestre?",
+        "opcoes": ["Girafa", " Elefante-africano", "Urso-polar", "baleia-jubarte"],
+        "respostaCorreta": " Elefante-africano",
+        "valor": 60000
       },
       {
-        "texto": "Qual é a capital do Brasil? 2",
+        "texto": "Qual é a capital do Brasil?",
         "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
         "respostaCorreta": "Brasília",
-        "valor": 1000
+        "valor": 60000
       },
       {
-        "texto": "Qual é a capital do Brasil? 3",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 1000
+        "texto": "Qual é o idioma oficial do Brasil?",
+        "opcoes": ["Francês", "Inglês", "Espanhol", "Português"],
+        "respostaCorreta": "Português",
+        "valor": 60000
       }
     ];
 
@@ -124,22 +135,22 @@ class Jogo {
   async nivel2() {
     const perguntasNivel2 = [
       {
-        "texto": "pergunta de viel2 1",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 10000
+        "texto": "Quem é o autor de “A Divina Comédia”?",
+        "opcoes": ["Dante Alighieri", "William Shakespeare", "Miguel de Cervantes", "Homero"],
+        "respostaCorreta": "Dante Alighieri",
+        "valor": 125000
       },
       {
-        "texto": "pergunta de viel2 2",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 10000
+        "texto": "Qual é o rio mais longo do mundo?",
+        "opcoes": ["Rio Nilo", "Rio Amazonas", "Rio Yangtzé", "Rio Paraná"],
+        "respostaCorreta": "Rio Amazonas",
+        "valor": 125000
       },
       {
-        "texto": "pergunta de viel2 3",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 10000
+        "texto": "Qual é o elemento químico mais abundante no universo?",
+        "opcoes": ["Oxigênio", "Carbono", "Hidrogênio", "Oganessônio"],
+        "respostaCorreta": "Hidrogênio",
+        "valor": 125000
       }
     ];
 
@@ -152,22 +163,22 @@ class Jogo {
   async nivel3() {
     const perguntasNivel3 = [
       {
-        "texto": "pergunta de viel 3 1",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 100000
+        "texto": "Qual é o nome do processo pelo qual as plantas transformam luz solar em energia?",
+        "opcoes": ["Respiração celular", "Fotossíntese", "Metabolismo", "Digestão"],
+        "respostaCorreta": "Fotossíntese",
+        "valor": 250000
       },
       {
-        "texto": "pergunta de viel 3 2",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 100000
+        "texto": "Quem propôs as leis do movimento planetário?",
+        "opcoes": ["Isaac Newton", "Galileu Galilei", "Johannes Kepler", " Albert Einstein"],
+        "respostaCorreta": "Johannes Kepler",
+        "valor": 250000
       },
       {
-        "texto": "pergunta de viel 3 3",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 100000
+        "texto": "Qual é o valor de pi (π) até a quinta casa decimal?",
+        "opcoes": ["3.14158", "3.14159", "3.14169", "3.14168"],
+        "respostaCorreta": "3.14159",
+        "valor": 250000
       }
     ];
 
@@ -180,22 +191,22 @@ class Jogo {
   async nivel4() {
     const perguntasNivel4 = [
       {
-        "texto": "pergunta de viel 4 1",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 200000
+        "texto": "Qual é a teoria que descreve a força fundamental da gravidade no universo moderno?",
+        "opcoes": [" Teoria da Relatividade Especial", "Teoria da Relatividade Geral", "Mecânica Quântica", "Teoria Eletromagnética"],
+        "respostaCorreta": "Teoria da Relatividade Geral",
+        "valor": 500000
       },
       {
-        "texto": "pergunta de viel 4 2",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 200000
+        "texto": "Quem foi o primeiro presidente do Brasil?",
+        "opcoes": ["Getúlio Vargas", "Juscelino Kubitschek", "Marechal Deodoro da Fonseca", "Prudente de Morais"],
+        "respostaCorreta": "Marechal Deodoro da Fonseca",
+        "valor": 500000
       },
       {
-        "texto": "pergunta de viel 4 3",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
-        "valor": 200000
+        "texto": "Qual é a sequência correta do código genético que traduz para o aminoácido metionina?",
+        "opcoes": ["UUU", "AUG", "GGG", "CCC"],
+        "respostaCorreta": "AUG",
+        "valor": 500000
       }
     ];
 
@@ -208,21 +219,21 @@ class Jogo {
   async nivel5() {
     const perguntasNivel5 = [
       {
-        "texto": "pergunta de viel 5 1",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
+        "texto": "Qual é a conjectura que afirma que todo número par maior que 2 pode ser expresso como a soma de dois números primos?",
+        "opcoes": ["Conjectura de Goldbach", "Hipótese de Riemann", "Conjectura de Goldbach", "Último Teorema de Fermat"],
+        "respostaCorreta": "Conjectura de Goldbach",
         "valor": 1000000
       },
       {
-        "texto": "pergunta de viel 5 2",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
+        "texto": "O que o Paradoxo dos Gêmeos demonstra sobre a percepção do tempo em diferentes sistemas de referência?",
+        "opcoes": ["Que o tempo é absoluto e independente do observador", "Que o tempo pode ser revertido", "Que o tempo é uma ilusão e não existe", "Que o tempo é relativo e pode dilatar dependendo da velocidade do observador"],
+        "respostaCorreta": "Que o tempo é relativo e pode dilatar dependendo da velocidade do observador",
         "valor": 1000000
       },
       {
-        "texto": "pergunta de viel 5 3",
-        "opcoes": ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-        "respostaCorreta": "Brasília",
+        "texto": "Qual é o nome do paradoxo que envolve um gato e a mecânica quântica?",
+        "opcoes": ["Paradoxo de Fermi", "Paradoxo de Schrödinger", "Paradoxo de Hawking", "Paradoxo de Einstein"],
+        "respostaCorreta": "Paradoxo de Schrödinger",
         "valor": 1000000
       }
     ];
