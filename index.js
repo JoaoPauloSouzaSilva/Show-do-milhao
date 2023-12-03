@@ -14,10 +14,11 @@ class Jogo {
   }
   
   async fazerPergunta(pergunta) {
+    console.clear();
     // nome do jogador
 
     console.log(`  `);
-    console.log(`Seu Saldo: R$ ${this.saldo}`);
+    console.log(`Seu Saldo: R$${this.saldo},00`);
     console.log(`  `);
     this.numrodada += 1;
     console.log(`Rodada ${this.numrodada}`);
@@ -26,9 +27,9 @@ class Jogo {
     console.log(`  `);
     console.log(`Se Errar: R$ 0,00  (Perde Tudo)`);
     console.log(`  `);
-    console.log(`Se Parar: R$ ${this.saldo}`);
+    console.log(`Se Parar: R$${this.saldo},00`);
     console.log(`  `);
-    console.log(`Se Acertar: + R$ ${pergunta.valor}`);
+    console.log(`Se Acertar: + R$${pergunta.valor}`);
     console.log(`  `);
 
     console.log(pergunta.texto);
@@ -50,8 +51,9 @@ class Jogo {
       console.log(`  `);
       console.log(`Correto! Você ganhou R$${pergunta.valor}`);
       console.log(`  `);
+      console.log(`Seu saldo era de: R$${this.saldo},00`);
       this.saldo += pergunta.valor;
-      console.log(`Seu saldo é: R$${this.saldo}`);
+      console.log(`Seu saldo agora é: R$${this.saldo},00`);
       console.log(`  `);
       this.proximonivel();
       return true;
@@ -59,14 +61,17 @@ class Jogo {
       console.log('Resposta incorreta. Você perdeu tudo!');
       console.log(`  `); 
       this.saldo = 0;
-      console.log(`Seu saldo é: R$${this.saldo}`);
+      console.log(`Seu saldo é: R$${this.saldo},00`);
+      this.painelfinal();
       return false;
     }
 
   }
 
-  async proximonivel() {
+  async proximonivel() { // espaço
+    console.log(`  `); 
     console.log(`---------------------------------------------------------`);
+    console.log(`  `); 
     console.log('Deseja parar por aqui? ');
     console.log('[ 1 ] Sim.');
     console.log('[ 2 ] Não.');
@@ -87,13 +92,25 @@ class Jogo {
 
         // Implemente a lógica para continuar para o próximo nível ou painel final
 
+        if (this.numrodada == 1) {
+          this.nivel2();
+        } else if (this.numrodada == 2) {
+          this.nivel3();
+        } else if (this.numrodada == 3) {
+          this.nivel4();
+        } else if (this.numrodada == 4) {
+          this.nivel5();
+        } else {
+          this.painelfinal();
+        }
+
         //guarda os nivei no vetor e toda vez que continuar ele passa pro 
           //proxima e o ultimo é o painel final
 
       } else {
         console.log(`  `);
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
-        proximonivel(); // Chama a função novamente se a entrada for inválida
+        this.proximonivel(); // Chama a função novamente se a entrada for inválida
       }
       callback();
     });
@@ -101,7 +118,51 @@ class Jogo {
   }
 
   async painelfinal (){
-    // painel final 
+    // painel final
+    console.clear();
+    console.log(`Bem-Vindo ao Painel Final`);
+    console.log(`  `); 
+    // Jogador: nome do jogador
+    console.log(`  `); 
+    console.log(`Você alcançou o nível ${this.numrodada}/5`);
+    console.log(`  `); 
+    // resposta correta da ultma pergunta
+    console.log(`  `); 
+    console.log(`Sua premiação foi de: R$${this.saldo},00`);
+    console.log(`  `); 
+
+    console.log(`  `); 
+    console.log(`---------------------------------------------------------`);
+    console.log(`  `); 
+    console.log('Deseja jogar novamente? ');
+    console.log('[ 1 ] Sim.');
+    console.log('[ 2 ] Não.');
+    rl.question('(digite o número)', (valor) => {
+      let finalizar = valor;
+
+      if (finalizar.trim() === '1') {
+        console.log(`  `);
+        console.log('Você escolheu jogar novamente.');
+        this.saldo = 0;
+        this.numrodada = 0;
+        this.nivel1();
+
+
+      } else if (finalizar.trim() === '2') {
+        console.log(`  `);
+        console.log('Você escolheu parar de jogar.');
+        rl.close();
+        process.exit();
+
+
+      } else {
+        console.log(`  `);
+        console.log('Entrada inválida. Por favor, digite 1 ou 2.');
+        this.painelfinal(); // Chama a função novamente se a entrada for inválida
+      }
+      callback();
+    });
+
   }
 
   async nivel1() {
