@@ -11,15 +11,20 @@ class Jogo {
   constructor() {
     this.saldo = 0;
     this.numrodada = 0;
-    this.nomedojogador = 'Fulano';
+    this.nomedojogador = '';
+    this.ultimarespostacorreta = 'Parabéns!, você acertou todas as perguntas';
   }
 
 
 
   perguntarNome() {
+    console.log(``);
+    console.log(`Bem-vindo(a) ao Show do Milhão!`);
+    console.log(` `);
     rl.question('Qual é o seu nome? ', (nome) => {
       this.nomedojogador = nome;
-      console.log(`Bem-vindo(a), ${this.nomedojogador}!`);
+      console.log(` `);
+      console.log(`Bem-vindo(a), ${this.nomedojogador}`);
       
       this.nivel1();
     });
@@ -27,7 +32,9 @@ class Jogo {
   
   async fazerPergunta(pergunta) {
     console.clear();
-    
+    console.log(``);
+    console.log(` ------------------- Show do Milhão! -------------------- `);
+    console.log(` `);
     console.log(`Boa sorte ${this.nomedojogador}!`);
     console.log(`  `);
     console.log(`Seu Saldo: R$${this.saldo},00`);
@@ -42,7 +49,7 @@ class Jogo {
     console.log(`  `);
     console.log(`Se Parar: R$${this.saldo},00`);
     console.log(`  `);
-    console.log(`Se Acertar: + R$${pergunta.valor}`);
+    console.log(`Se Acertar seu saldo vai para: R$${pergunta.valor}`);
     console.log(`  `);
 
     console.log(pergunta.texto);
@@ -65,7 +72,7 @@ class Jogo {
       console.log(`Correto! Você ganhou R$${pergunta.valor}`);
       console.log(`  `);
       console.log(`Seu saldo era de: R$${this.saldo},00`);
-      this.saldo += pergunta.valor;
+      this.saldo = pergunta.valor;
       console.log(`Seu saldo agora é: R$${this.saldo},00`);
       console.log(`  `);
       this.proximonivel();
@@ -75,6 +82,9 @@ class Jogo {
       console.log(`  `); 
       this.saldo = 0;
       console.log(`Seu saldo é: R$${this.saldo},00`);
+
+      this.ultimarespostacorreta = pergunta.respostaCorreta;
+      
       this.painelfinal();
   
     }
@@ -116,7 +126,7 @@ class Jogo {
     console.log(`  `); 
     console.log(`Você alcançou o nível ${this.numrodada} de 5 (${this.numrodada}/5)`);
     console.log(`  `); 
-    // resposta correta da ultma pergunta
+    console.log(`Resposta da última pergunta: ${this.ultimarespostacorreta}`);
     console.log(`  `); 
     console.log(`Sua premiação foi de: R$${this.saldo},00`);
     console.log(`  `); 
@@ -160,8 +170,8 @@ class Jogo {
     const perguntasNivel1 = [
       {
         "texto": "Qual é o maior animal terrestre?",
-        "opcoes": ["Girafa", " Elefante-africano", "Urso-polar", "baleia-jubarte"],
-        "respostaCorreta": " Elefante-africano",
+        "opcoes": ["Girafa", "Elefante-africano", "Urso-polar", "baleia-jubarte"],
+        "respostaCorreta": "Elefante-africano",
         "valor": 60000
       },
       {
@@ -244,7 +254,7 @@ class Jogo {
     const perguntasNivel4 = [
       {
         "texto": "Qual é a teoria que descreve a força fundamental da gravidade no universo moderno?",
-        "opcoes": [" Teoria da Relatividade Especial", "Teoria da Relatividade Geral", "Mecânica Quântica", "Teoria Eletromagnética"],
+        "opcoes": ["Teoria da Relatividade Especial", "Teoria da Relatividade Geral", "Mecânica Quântica", "Teoria Eletromagnética"],
         "respostaCorreta": "Teoria da Relatividade Geral",
         "valor": 500000
       },
@@ -300,5 +310,5 @@ class Jogo {
 const jogo = new Jogo();
 console.clear();
 jogo.perguntarNome();
-// jogo.nivel1();
+
 
