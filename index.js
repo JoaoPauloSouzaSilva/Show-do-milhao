@@ -5,20 +5,16 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
-
 class Jogo {
   constructor() {
     this.saldo = 0;
     this.numrodada = 0;
     this.nomedojogador = '';
     this.ultimarespostacorreta = 'Parabéns!, você acertou todas as perguntas';
-
+    this.repetirjogo = '';
   }
 
-
-
-  perguntarNome() {
+  inicia() {
     console.log(``);
     console.log(`Bem-vindo(a) ao Show do Milhão!`);
     console.log(` `);
@@ -112,11 +108,11 @@ class Jogo {
         } else if (this.numrodada == 4) {
           this.nivel5();
         } 
-          // else {
-          //   this.painelfinal();
-          // }
+       
       } else {
+        console.log(`  `); 
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
+        console.log(`  `); 
         this.proximonivel(); // Chama a função novamente se a entrada for inválida
       }
     });
@@ -142,11 +138,16 @@ class Jogo {
     console.log(`  `); 
     console.log(`----------------------------------------------------------------`);
     console.log(`  `); 
-    console.log('Deseja jogar novamente? ');
+    this.jogarnovamente();
+
+  }
+
+  jogarnovamente(){
+    console.log('Deseja jogar novamente? '); // vira função
     console.log('[ 1 ] Sim.');
     console.log('[ 2 ] Não.');
     rl.question('(digite o número): ', (valor) => {
-  
+      
 
       if (valor == 1) {
         console.log(`  `);
@@ -155,7 +156,6 @@ class Jogo {
         this.numrodada = 0;
         this.nivel1();
 
-
       } else if (valor == 2) {
         console.clear();
         console.log(`  `);
@@ -163,16 +163,14 @@ class Jogo {
         console.log(`  `);
         rl.close();
 
-
-
       } else {
         console.log(`  `);
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
-        this.painelfinal(); // Chama a função novamente se a entrada for inválida
+        console.log(`  `);
+        this.jogarnovamente(); // Chama a função novamente se a entrada for inválida
       }
       
     });
-
   }
 
   async nivel1() {
@@ -318,6 +316,6 @@ class Jogo {
 
 const jogo = new Jogo();
 console.clear();
-jogo.perguntarNome();
+jogo.inicia();
 
 
