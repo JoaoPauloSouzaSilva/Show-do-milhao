@@ -11,14 +11,27 @@ class Jogo {
   constructor() {
     this.saldo = 0;
     this.numrodada = 0;
+    this.nomedojogador = 'Fulano';
+  }
+
+
+
+  perguntarNome() {
+    rl.question('Qual é o seu nome? ', (nome) => {
+      this.nomedojogador = nome;
+      console.log(`Bem-vindo(a), ${this.nomedojogador}!`);
+      
+      this.nivel1();
+    });
   }
   
   async fazerPergunta(pergunta) {
     console.clear();
-    // nome do jogador
-
+    
+    console.log(`Boa sorte ${this.nomedojogador}!`);
     console.log(`  `);
     console.log(`Seu Saldo: R$${this.saldo},00`);
+    console.log(`  `);
     console.log(`  `);
     this.numrodada += 1;
     console.log(`Rodada ${this.numrodada}`);
@@ -56,42 +69,25 @@ class Jogo {
       console.log(`Seu saldo agora é: R$${this.saldo},00`);
       console.log(`  `);
       this.proximonivel();
-      return true;
+      
     } else {
       console.log('Resposta incorreta. Você perdeu tudo!');
       console.log(`  `); 
       this.saldo = 0;
       console.log(`Seu saldo é: R$${this.saldo},00`);
       this.painelfinal();
-      return false;
+  
     }
 
   }
 
-  async proximonivel() { // espaço
-    console.log(`  `); 
-    console.log(`---------------------------------------------------------`);
-    console.log(`  `); 
-    console.log('Deseja parar por aqui? ');
-    console.log('[ 1 ] Sim.');
-    console.log('[ 2 ] Não.');
-    rl.question('(digite o número)', (valor) => {
-      let proseguir = valor;
-
-      if (proseguir.trim() === '1') {
-        console.log(`  `);
+  proximonivel() {
+    rl.question('Deseja continuar jogando? [1] para parar, [2] para continuar: ', (resposta) => {
+      if (resposta == 1) {
         console.log('Você escolheu parar o jogo.');
-        rl.close(); // Feche a interface readline após processar a entrada
-
-        // Implemente a lógica para quando o jogador decide parar
-        // vai para painelfinal();
-
-      } else if (proseguir.trim() === '2') {
-        console.log(`  `);
+        this.painelfinal();
+      } else if (resposta == 2) {
         console.log('Você escolheu continuar o jogo.');
-
-        // Implemente a lógica para continuar para o próximo nível ou painel final
-
         if (this.numrodada == 1) {
           this.nivel2();
         } else if (this.numrodada == 2) {
@@ -103,44 +99,37 @@ class Jogo {
         } else {
           this.painelfinal();
         }
-
-        //guarda os nivei no vetor e toda vez que continuar ele passa pro 
-          //proxima e o ultimo é o painel final
-
       } else {
-        console.log(`  `);
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
         this.proximonivel(); // Chama a função novamente se a entrada for inválida
       }
-      callback();
     });
-    
   }
-
+  
   async painelfinal (){
     // painel final
     console.clear();
-    console.log(`Bem-Vindo ao Painel Final`);
     console.log(`  `); 
-    // Jogador: nome do jogador
+    console.log(` --------------- Bem-Vindo ao Painel Final ---------------------`);
     console.log(`  `); 
-    console.log(`Você alcançou o nível ${this.numrodada}/5`);
+    console.log(`Nome do jogador(a): ${this.nomedojogador}!`);
+    console.log(`  `); 
+    console.log(`Você alcançou o nível ${this.numrodada} de 5 (${this.numrodada}/5)`);
     console.log(`  `); 
     // resposta correta da ultma pergunta
     console.log(`  `); 
     console.log(`Sua premiação foi de: R$${this.saldo},00`);
     console.log(`  `); 
-
     console.log(`  `); 
-    console.log(`---------------------------------------------------------`);
+    console.log(`----------------------------------------------------------------`);
     console.log(`  `); 
     console.log('Deseja jogar novamente? ');
     console.log('[ 1 ] Sim.');
     console.log('[ 2 ] Não.');
     rl.question('(digite o número)', (valor) => {
-      let finalizar = valor;
+  
 
-      if (finalizar.trim() === '1') {
+      if (valor == 1) {
         console.log(`  `);
         console.log('Você escolheu jogar novamente.');
         this.saldo = 0;
@@ -148,11 +137,13 @@ class Jogo {
         this.nivel1();
 
 
-      } else if (finalizar.trim() === '2') {
+      } else if (valor == 2) {
+        console.clear();
         console.log(`  `);
         console.log('Você escolheu parar de jogar.');
+        console.log(`  `);
         rl.close();
-        process.exit();
+
 
 
       } else {
@@ -160,7 +151,7 @@ class Jogo {
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
         this.painelfinal(); // Chama a função novamente se a entrada for inválida
       }
-      callback();
+      
     });
 
   }
@@ -190,7 +181,7 @@ class Jogo {
     const perguntaAleatoriaNivel1 = perguntasNivel1[Math.floor(Math.random() * perguntasNivel1.length)];
     const acertou = await this.fazerPergunta(perguntaAleatoriaNivel1);
 
-    rl.close();
+  
   }
 
   async nivel2() {
@@ -218,7 +209,7 @@ class Jogo {
     const perguntaAleatoriaNivel2 = perguntasNivel2[Math.floor(Math.random() * perguntasNivel2.length)];
     const acertou = await this.fazerPergunta(perguntaAleatoriaNivel2);
 
-    rl.close();
+  
   }
 
   async nivel3() {
@@ -246,7 +237,7 @@ class Jogo {
     const perguntaAleatoriaNivel3 = perguntasNivel3[Math.floor(Math.random() * perguntasNivel3.length)];
     const acertou = await this.fazerPergunta(perguntaAleatoriaNivel3);
 
-    rl.close();
+
   }
 
   async nivel4() {
@@ -274,7 +265,7 @@ class Jogo {
     const perguntaAleatoriaNivel4 = perguntasNivel4[Math.floor(Math.random() * perguntasNivel4.length)];
     const acertou = await this.fazerPergunta(perguntaAleatoriaNivel4);
 
-    rl.close();
+  
   }
 
   async nivel5() {
@@ -302,11 +293,12 @@ class Jogo {
     const perguntaAleatoriaNivel5 = perguntasNivel5[Math.floor(Math.random() * perguntasNivel5.length)];
     const acertou = await this.fazerPergunta(perguntaAleatoriaNivel5);
 
-    rl.close();
+    
   }
 }
 
 const jogo = new Jogo();
 console.clear();
-jogo.nivel1();
+jogo.perguntarNome();
+// jogo.nivel1();
 
