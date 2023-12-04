@@ -13,6 +13,7 @@ class Jogo {
     this.numrodada = 0;
     this.nomedojogador = '';
     this.ultimarespostacorreta = 'Parabéns!, você acertou todas as perguntas';
+
   }
 
 
@@ -65,9 +66,10 @@ class Jogo {
   }
 
   verificarResposta(pergunta, respostaUsuario) {
-    console.clear();
+  
     const indiceRespostaCorreta = pergunta.opcoes.indexOf(pergunta.respostaCorreta) + 1;
     if (parseInt(respostaUsuario) === indiceRespostaCorreta) {
+      console.clear();
       console.log(`  `);
       console.log(`Correto! Você ganhou R$${pergunta.valor}`);
       console.log(`  `);
@@ -78,13 +80,12 @@ class Jogo {
       this.proximonivel();
       
     } else {
+      console.clear();
       console.log('Resposta incorreta. Você perdeu tudo!');
       console.log(`  `); 
       this.saldo = 0;
       console.log(`Seu saldo é: R$${this.saldo},00`);
-
       this.ultimarespostacorreta = pergunta.respostaCorreta;
-      
       this.painelfinal();
   
     }
@@ -92,7 +93,11 @@ class Jogo {
   }
 
   proximonivel() {
-    rl.question('Deseja continuar jogando? [1] para parar, [2] para continuar: ', (resposta) => {
+    if (this.numrodada < 5) {
+      console.log('Deseja continuar jogando? ');
+    console.log('[ 1 ] Não');
+    console.log('[ 2 ] Sim');
+    rl.question('(Digite um número): ', (resposta) => {
       if (resposta == 1) {
         console.log('Você escolheu parar o jogo.');
         this.painelfinal();
@@ -106,23 +111,27 @@ class Jogo {
           this.nivel4();
         } else if (this.numrodada == 4) {
           this.nivel5();
-        } else {
-          this.painelfinal();
-        }
+        } 
+          // else {
+          //   this.painelfinal();
+          // }
       } else {
         console.log('Entrada inválida. Por favor, digite 1 ou 2.');
         this.proximonivel(); // Chama a função novamente se a entrada for inválida
       }
     });
+    } else {
+      this.painelfinal();
+    }
   }
   
   async painelfinal (){
     // painel final
-    console.clear();
+   
     console.log(`  `); 
     console.log(` --------------- Bem-Vindo ao Painel Final ---------------------`);
     console.log(`  `); 
-    console.log(`Nome do jogador(a): ${this.nomedojogador}!`);
+    console.log(`Nome do jogador(a): ${this.nomedojogador}`);
     console.log(`  `); 
     console.log(`Você alcançou o nível ${this.numrodada} de 5 (${this.numrodada}/5)`);
     console.log(`  `); 
@@ -136,7 +145,7 @@ class Jogo {
     console.log('Deseja jogar novamente? ');
     console.log('[ 1 ] Sim.');
     console.log('[ 2 ] Não.');
-    rl.question('(digite o número)', (valor) => {
+    rl.question('(digite o número): ', (valor) => {
   
 
       if (valor == 1) {
