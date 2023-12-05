@@ -83,13 +83,13 @@ Para jogar o "Show do Milhão", siga os passos abaixo para configurar e iniciar 
 4. **Inicie o Jogo**:
    - Na IDE, abra um novo terminal (atalho: `Ctrl + Shift + ‘`).
    - Digite o comando:
-      ```
+       ```
       npm install
       ```
-  - Em seguinda digite o comando:
-     ```
-     npm start
-     ```
+   - Em seguinda digite o comando:
+      ```
+      npm start
+      ```
    - O jogo será iniciado e você poderá começar a jogar.
 
 **Nota Importante**: Certifique-se de ter o Node.js instalado em sua máquina para que o projeto funcione corretamente.
